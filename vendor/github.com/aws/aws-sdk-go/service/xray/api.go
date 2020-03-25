@@ -2893,6 +2893,9 @@ func (s *EncryptionConfig) SetType(v string) *EncryptionConfig {
 type ErrorRootCause struct {
 	_ struct{} `type:"structure"`
 
+	// A flag that denotes that the root cause impacts the trace client.
+	ClientImpacting *bool `type:"boolean"`
+
 	// A list of services corresponding to an error. A service identifies a segment
 	// and it contains a name, account ID, type, and inferred flag.
 	Services []*ErrorRootCauseService `type:"list"`
@@ -2906,6 +2909,12 @@ func (s ErrorRootCause) String() string {
 // GoString returns the string representation
 func (s ErrorRootCause) GoString() string {
 	return s.String()
+}
+
+// SetClientImpacting sets the ClientImpacting field's value.
+func (s *ErrorRootCause) SetClientImpacting(v bool) *ErrorRootCause {
+	s.ClientImpacting = &v
+	return s
 }
 
 // SetServices sets the Services field's value.
@@ -3073,6 +3082,9 @@ func (s *ErrorStatistics) SetTotalCount(v int64) *ErrorStatistics {
 type FaultRootCause struct {
 	_ struct{} `type:"structure"`
 
+	// A flag that denotes that the root cause impacts the trace client.
+	ClientImpacting *bool `type:"boolean"`
+
 	// A list of corresponding services. A service identifies a segment and it contains
 	// a name, account ID, type, and inferred flag.
 	Services []*FaultRootCauseService `type:"list"`
@@ -3086,6 +3098,12 @@ func (s FaultRootCause) String() string {
 // GoString returns the string representation
 func (s FaultRootCause) GoString() string {
 	return s.String()
+}
+
+// SetClientImpacting sets the ClientImpacting field's value.
+func (s *FaultRootCause) SetClientImpacting(v bool) *FaultRootCause {
+	s.ClientImpacting = &v
+	return s
 }
 
 // SetServices sets the Services field's value.
@@ -4354,8 +4372,8 @@ func (s *InstanceIdDetail) SetId(v string) *InstanceIdDetail {
 
 // The request is missing required parameters or has invalid parameters.
 type InvalidRequestException struct {
-	_            struct{} `type:"structure"`
-	respMetadata protocol.ResponseMetadata
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
 
 	Message_ *string `locationName:"Message" type:"string"`
 }
@@ -4372,7 +4390,7 @@ func (s InvalidRequestException) GoString() string {
 
 func newErrorInvalidRequestException(v protocol.ResponseMetadata) error {
 	return &InvalidRequestException{
-		respMetadata: v,
+		RespMetadata: v,
 	}
 }
 
@@ -4400,12 +4418,12 @@ func (s InvalidRequestException) Error() string {
 
 // Status code returns the HTTP status code for the request's response error.
 func (s InvalidRequestException) StatusCode() int {
-	return s.respMetadata.StatusCode
+	return s.RespMetadata.StatusCode
 }
 
 // RequestID returns the service's response RequestID for request.
 func (s InvalidRequestException) RequestID() string {
-	return s.respMetadata.RequestID
+	return s.RespMetadata.RequestID
 }
 
 type PutEncryptionConfigInput struct {
@@ -4666,6 +4684,9 @@ func (s *ResourceARNDetail) SetARN(v string) *ResourceARNDetail {
 type ResponseTimeRootCause struct {
 	_ struct{} `type:"structure"`
 
+	// A flag that denotes that the root cause impacts the trace client.
+	ClientImpacting *bool `type:"boolean"`
+
 	// A list of corresponding services. A service identifies a segment and contains
 	// a name, account ID, type, and inferred flag.
 	Services []*ResponseTimeRootCauseService `type:"list"`
@@ -4679,6 +4700,12 @@ func (s ResponseTimeRootCause) String() string {
 // GoString returns the string representation
 func (s ResponseTimeRootCause) GoString() string {
 	return s.String()
+}
+
+// SetClientImpacting sets the ClientImpacting field's value.
+func (s *ResponseTimeRootCause) SetClientImpacting(v bool) *ResponseTimeRootCause {
+	s.ClientImpacting = &v
+	return s
 }
 
 // SetServices sets the Services field's value.
@@ -4834,8 +4861,8 @@ func (s *RootCauseException) SetName(v string) *RootCauseException {
 
 // You have reached the maximum number of sampling rules.
 type RuleLimitExceededException struct {
-	_            struct{} `type:"structure"`
-	respMetadata protocol.ResponseMetadata
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
 
 	Message_ *string `locationName:"Message" type:"string"`
 }
@@ -4852,7 +4879,7 @@ func (s RuleLimitExceededException) GoString() string {
 
 func newErrorRuleLimitExceededException(v protocol.ResponseMetadata) error {
 	return &RuleLimitExceededException{
-		respMetadata: v,
+		RespMetadata: v,
 	}
 }
 
@@ -4880,12 +4907,12 @@ func (s RuleLimitExceededException) Error() string {
 
 // Status code returns the HTTP status code for the request's response error.
 func (s RuleLimitExceededException) StatusCode() int {
-	return s.respMetadata.StatusCode
+	return s.RespMetadata.StatusCode
 }
 
 // RequestID returns the service's response RequestID for request.
 func (s RuleLimitExceededException) RequestID() string {
-	return s.respMetadata.RequestID
+	return s.RespMetadata.RequestID
 }
 
 // A sampling rule that services use to decide whether to instrument a request.
@@ -5918,8 +5945,8 @@ func (s *TelemetryRecord) SetTimestamp(v time.Time) *TelemetryRecord {
 
 // The request exceeds the maximum number of requests per second.
 type ThrottledException struct {
-	_            struct{} `type:"structure"`
-	respMetadata protocol.ResponseMetadata
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
 
 	Message_ *string `locationName:"Message" type:"string"`
 }
@@ -5936,7 +5963,7 @@ func (s ThrottledException) GoString() string {
 
 func newErrorThrottledException(v protocol.ResponseMetadata) error {
 	return &ThrottledException{
-		respMetadata: v,
+		RespMetadata: v,
 	}
 }
 
@@ -5964,12 +5991,12 @@ func (s ThrottledException) Error() string {
 
 // Status code returns the HTTP status code for the request's response error.
 func (s ThrottledException) StatusCode() int {
-	return s.respMetadata.StatusCode
+	return s.RespMetadata.StatusCode
 }
 
 // RequestID returns the service's response RequestID for request.
 func (s ThrottledException) RequestID() string {
-	return s.respMetadata.RequestID
+	return s.RespMetadata.RequestID
 }
 
 // A list of TimeSeriesStatistic structures.
